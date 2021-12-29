@@ -128,11 +128,14 @@ dolphinscheduler-service/src/main/resources/registry.properties</p>
 <h5>Server start</h5>
 <p>There are three necessary server we have to start, including MasterServer，WorkerServer，ApiApplicationServer, and a optional server you could start if you need, named LoggerServer.</p>
 <ul>
-<li>MasterServer：Execute function <code>main</code> in the class <code>org.apache.dolphinscheduler.server.master.MasterServer</code> by Intellij IDEA, with the configuration <em>VM Options</em> <code>-Dlogging.config=classpath:logback-master.xml -Ddruid.mysql.usePingMethod=false</code></li>
-<li>WorkerServer：Execute function <code>main</code> in the class <code>org.apache.dolphinscheduler.server.worker.WorkerServer</code> by Intellij IDEA, with the configuration <em>VM Options</em> <code>-Dlogging.config=classpath:logback-worker.xml -Ddruid.mysql.usePingMethod=false</code></li>
-<li>ApiApplicationServer：Execute function <code>main</code> in the class <code>org.apache.dolphinscheduler.api.ApiApplicationServer</code> by Intellij IDEA, with the configuration <em>VM Options</em> <code>-Dlogging.config=classpath:logback-api.xml -Dspring.profiles.active=api</code>. After it started, you could find Open API documentation in <a href="http://localhost:12345/dolphinscheduler/doc.html">http://localhost:12345/dolphinscheduler/doc.html</a></li>
+<li>MasterServer：Execute function <code>main</code> in the class <code>org.apache.dolphinscheduler.server.master.MasterServer</code> by Intellij IDEA, with the configuration <em>VM Options</em> <code>-Dlogging.config=classpath:logback-master.xml -Ddruid.mysql.usePingMethod=false -Dspring.profiles.active=mysql</code></li>
+<li>WorkerServer：Execute function <code>main</code> in the class <code>org.apache.dolphinscheduler.server.worker.WorkerServer</code> by Intellij IDEA, with the configuration <em>VM Options</em> <code>-Dlogging.config=classpath:logback-worker.xml -Ddruid.mysql.usePingMethod=false -Dspring.profiles.active=mysql</code></li>
+<li>ApiApplicationServer：Execute function <code>main</code> in the class <code>org.apache.dolphinscheduler.api.ApiApplicationServer</code> by Intellij IDEA, with the configuration <em>VM Options</em> <code>-Dlogging.config=classpath:logback-api.xml -Dspring.profiles.active=api,mysql</code>. After it started, you could find Open API documentation in <a href="http://localhost:12345/dolphinscheduler/doc.html">http://localhost:12345/dolphinscheduler/doc.html</a></li>
 <li>LoggerServer：<strong>Optional server, only start if you need</strong>，Execute function <code>main</code> in the class <code>org.apache.dolphinscheduler.server.log.LoggerServer</code> by Intellij IDEA</li>
 </ul>
+<blockquote>
+<p>The <code>mysql</code> in the VM Options <code>-Dspring.profiles.active=mysql</code> means specified configuration file</p>
+</blockquote>
 <h3>Start Frontend Server</h3>
 <p>Install frontend dependencies and run it</p>
 <pre><code class="language-shell">cd dolphinscheduler-ui
@@ -144,7 +147,7 @@ npm run start
   <script src="//cdn.jsdelivr.net/npm/react@15.6.2/dist/react-with-addons.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/react-dom@15.6.2/dist/react-dom.min.js"></script>
   <script>window.rootPath = '';</script>
-  <script src="/build/vendor.1ea05b5.js"></script>
+  <script src="/build/vendor.009b912.js"></script>
   <script src="/build/development.md.f74a66e.js"></script>
   <script>
     var _hmt = _hmt || [];
