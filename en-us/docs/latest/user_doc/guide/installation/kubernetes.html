@@ -20,13 +20,13 @@
 <li>PV provisioner support in the underlying infrastructure</li>
 </ul>
 <h2>Installing the Chart</h2>
-<p>Please download the source code package apache-dolphinscheduler-2.0.1-src.tar.gz, download address: <a href="/en-us/download/download.html">download</a></p>
+<p>Please download the source code package apache-dolphinscheduler-2.0.2-src.tar.gz, download address: <a href="/en-us/download/download.html">download</a></p>
 <p>To install the chart with the release name <code>dolphinscheduler</code>, please execute the following commands:</p>
-<pre><code>$ tar -zxvf apache-dolphinscheduler-2.0.1-src.tar.gz
-$ cd apache-dolphinscheduler-2.0.1-src/docker/kubernetes/dolphinscheduler
+<pre><code>$ tar -zxvf apache-dolphinscheduler-2.0.2-src.tar.gz
+$ cd apache-dolphinscheduler-2.0.2-src/docker/kubernetes/dolphinscheduler
 $ helm repo add bitnami https://charts.bitnami.com/bitnami
 $ helm dependency update .
-$ helm install dolphinscheduler . --set image.tag=2.0.1
+$ helm install dolphinscheduler . --set image.tag=2.0.2
 </code></pre>
 <p>To install the chart with a namespace named <code>test</code>:</p>
 <pre><code class="language-bash">$ helm install dolphinscheduler . -n <span class="hljs-built_in">test</span>
@@ -59,7 +59,7 @@ NODE_PORT=$(kubectl get svc {{ template <span class="hljs-string">&quot;dolphins
 </code></pre>
 <p>And then access the web: http://<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mi>O</mi><mi>D</mi><msub><mi>E</mi><mi>I</mi></msub><mi>P</mi><mo>:</mo></mrow><annotation encoding="application/x-tex">NODE_IP:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mord mathit" style="margin-right:0.02778em;">O</span><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mord"><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:-0.05764em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit" style="margin-right:0.07847em;">I</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mrel">:</span></span></span></span>NODE_PORT/dolphinscheduler</p>
 <p>The default username is <code>admin</code> and the default password is <code>dolphinscheduler123</code></p>
-<p>Please refer to the <code>Quick Start</code> in the chapter <a href="/en-us/docs/2.0.1/user_doc/guide/quick-start.html">User Manual</a> to explore how to use DolphinScheduler</p>
+<p>Please refer to the <code>Quick Start</code> in the chapter <a href="/en-us/docs/2.0.2/user_doc/guide/quick-start.html">User Manual</a> to explore how to use DolphinScheduler</p>
 <h2>Uninstalling the Chart</h2>
 <p>To uninstall/delete the <code>dolphinscheduler</code> deployment:</p>
 <pre><code class="language-bash">$ helm uninstall dolphinscheduler
@@ -280,7 +280,7 @@ kubectl scale --replicas=6 sts dolphinscheduler-worker -n test # with test names
 <p>Create a new <code>Dockerfile</code> to add MySQL driver:</p>
 </li>
 </ol>
-<pre><code>FROM dolphinscheduler.docker.scarf.sh/apache/dolphinscheduler:2.0.1
+<pre><code>FROM dolphinscheduler.docker.scarf.sh/apache/dolphinscheduler:2.0.2
 COPY mysql-connector-java-8.0.16.jar /opt/dolphinscheduler/lib
 </code></pre>
 <ol start="3">
@@ -328,7 +328,7 @@ COPY mysql-connector-java-8.0.16.jar /opt/dolphinscheduler/lib
 <p>Create a new <code>Dockerfile</code> to add MySQL driver:</p>
 </li>
 </ol>
-<pre><code>FROM dolphinscheduler.docker.scarf.sh/apache/dolphinscheduler:2.0.1
+<pre><code>FROM dolphinscheduler.docker.scarf.sh/apache/dolphinscheduler:2.0.2
 COPY mysql-connector-java-8.0.16.jar /opt/dolphinscheduler/lib
 </code></pre>
 <ol start="3">
@@ -363,7 +363,7 @@ COPY mysql-connector-java-8.0.16.jar /opt/dolphinscheduler/lib
 <p>Create a new <code>Dockerfile</code> to add Oracle driver:</p>
 </li>
 </ol>
-<pre><code>FROM dolphinscheduler.docker.scarf.sh/apache/dolphinscheduler:2.0.1
+<pre><code>FROM dolphinscheduler.docker.scarf.sh/apache/dolphinscheduler:2.0.2
 COPY ojdbc8-19.9.0.0.jar /opt/dolphinscheduler/lib
 </code></pre>
 <ol start="3">
@@ -389,7 +389,7 @@ COPY ojdbc8-19.9.0.0.jar /opt/dolphinscheduler/lib
 <ol>
 <li>Create a new <code>Dockerfile</code> to install pip:</li>
 </ol>
-<pre><code>FROM dolphinscheduler.docker.scarf.sh/apache/dolphinscheduler:2.0.1
+<pre><code>FROM dolphinscheduler.docker.scarf.sh/apache/dolphinscheduler:2.0.2
 COPY requirements.txt /tmp
 RUN apt-get update &amp;&amp; \
     apt-get install -y --no-install-recommends python-pip &amp;&amp; \
@@ -422,7 +422,7 @@ RUN apt-get update &amp;&amp; \
 <ol>
 <li>Create a new <code>Dockerfile</code> to install Python 3:</li>
 </ol>
-<pre><code>FROM dolphinscheduler.docker.scarf.sh/apache/dolphinscheduler:2.0.1
+<pre><code>FROM dolphinscheduler.docker.scarf.sh/apache/dolphinscheduler:2.0.2
 RUN apt-get update &amp;&amp; \
     apt-get install -y --no-install-recommends python3 &amp;&amp; \
     rm -rf /var/lib/apt/lists/*
