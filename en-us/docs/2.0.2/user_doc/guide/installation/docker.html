@@ -90,6 +90,7 @@ apache/dolphinscheduler:2.0.2 all
      LoggerServer         ----- logger service
      ApiApplicationServer ----- api service
      AlertServer          ----- alert service
+     PythonGatewayServer  ----- python gateway service
 </code></pre>
 <p>If you just want to run part of the services in the DolphinScheduler</p>
 <p>You can start some services in DolphinScheduler by running the following commands.</p>
@@ -128,6 +129,14 @@ apache/dolphinscheduler:2.0.2 api-server
 -e DATABASE_HOST=&quot;192.168.x.x&quot; -e DATABASE_PORT=&quot;5432&quot; -e DATABASE_DATABASE=&quot;dolphinscheduler&quot; \
 -e DATABASE_USERNAME=&quot;test&quot; -e DATABASE_PASSWORD=&quot;test&quot; \
 apache/dolphinscheduler:2.0.2 alert-server
+</code></pre>
+<ul>
+<li>Start a <strong>python gateway server</strong>, For example:</li>
+</ul>
+<pre><code>$ docker run -d --name dolphinscheduler-python-gateway \
+-e DATABASE_HOST=&quot;192.168.x.x&quot; -e DATABASE_PORT=&quot;5432&quot; -e DATABASE_DATABASE=&quot;dolphinscheduler&quot; \
+-e DATABASE_USERNAME=&quot;test&quot; -e DATABASE_PASSWORD=&quot;test&quot; \
+apache/dolphinscheduler:2.0.2 python-gateway
 </code></pre>
 <p><strong>Note</strong>: You must be specify <code>DATABASE_HOST</code>, <code>DATABASE_PORT</code>, <code>DATABASE_DATABASE</code>, <code>DATABASE_USERNAME</code>, <code>DATABASE_PASSWORD</code>, <code>ZOOKEEPER_QUORUM</code> when start a standalone dolphinscheduler server.</p>
 <h2>Environment Variables</h2>

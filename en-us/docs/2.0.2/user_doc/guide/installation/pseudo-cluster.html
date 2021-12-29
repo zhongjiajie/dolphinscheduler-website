@@ -113,6 +113,7 @@ masters=&quot;localhost&quot;
 workers=&quot;localhost:default&quot;
 alertServer=&quot;localhost&quot;
 apiServers=&quot;localhost&quot;
+pythonGatewayServers=&quot;localhost&quot;
 <span class="hljs-meta">
 #</span><span class="bash"> DolphinScheduler installation path, it will auto create <span class="hljs-keyword">if</span> not exists</span>
 installPath=&quot;~/dolphinscheduler&quot;
@@ -179,6 +180,10 @@ sh ./bin/dolphinscheduler-daemon.sh stop logger-server
 #</span><span class="bash"> Start or stop Alert</span>
 sh ./bin/dolphinscheduler-daemon.sh start alert-server
 sh ./bin/dolphinscheduler-daemon.sh stop alert-server
+<span class="hljs-meta">
+#</span><span class="bash"> Start or stop Python Gateway Server</span>
+sh ./bin/dolphinscheduler-daemon.sh start python-gateway-server
+sh ./bin/dolphinscheduler-daemon.sh stop python-gateway-server
 </code></pre>
 <blockquote>
 <p><strong><em>Note:</em></strong>: Please refer to the section of &quot;System Architecture Design&quot; for service usage</p>

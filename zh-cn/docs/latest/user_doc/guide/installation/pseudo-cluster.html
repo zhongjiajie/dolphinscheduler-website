@@ -113,6 +113,7 @@ masters=&quot;localhost&quot;
 workers=&quot;localhost:default&quot;
 alertServer=&quot;localhost&quot;
 apiServers=&quot;localhost&quot;
+pythonGatewayServers=&quot;localhost&quot;
 <span class="hljs-meta">
 #</span><span class="bash"> DolphinScheduler安装路径，如果不存在会创建</span>
 installPath=&quot;~/dolphinscheduler&quot;
@@ -178,6 +179,10 @@ sh ./bin/dolphinscheduler-daemon.sh stop logger-server
 #</span><span class="bash"> 启停 Alert</span>
 sh ./bin/dolphinscheduler-daemon.sh start alert-server
 sh ./bin/dolphinscheduler-daemon.sh stop alert-server
+<span class="hljs-meta">
+#</span><span class="bash"> 启停 Python Gateway</span>
+sh ./bin/dolphinscheduler-daemon.sh start python-gateway-server
+sh ./bin/dolphinscheduler-daemon.sh stop python-gateway-server
 </code></pre>
 <blockquote>
 <p><strong><em>注意:</em></strong>：服务用途请具体参见《系统架构设计》小节</p>
