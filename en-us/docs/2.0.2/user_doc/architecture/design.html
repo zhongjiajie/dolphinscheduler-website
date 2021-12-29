@@ -199,30 +199,30 @@ to execute again.</li>
 <p>Fault tolerance is divided into service downtime fault tolerance and task retry, and service downtime fault tolerance is
 divided into master fault tolerance and worker fault tolerance.</p>
 <h6>1. Downtime fault tolerance</h6>
-<p>The service fault-tolerance design relies on ZooKeeper's Watcher mechanism, and the implementation principle is shown in
-the figure:</p>
+<p>The service fault-tolerance design relies on ZooKeeper's Watcher mechanism, and the implementation principle is shown in the figure:</p>
  <p align="center">
    <img src="https://analysys.github.io/easyscheduler_docs_cn/images/fault-tolerant.png" alt="DolphinScheduler fault-tolerant design"  width="40%" />
  </p>
 Among them, the Master monitors the directories of other Masters and Workers. If the remove event is heard, fault tolerance of the process instance or task instance will be performed according to the specific business logic.
 <ul>
-<li>Master fault tolerance flowchart：</li>
+<li>Master fault tolerance：</li>
 </ul>
- <p align="center">
-   <img src="https://analysys.github.io/easyscheduler_docs_cn/images/fault-tolerant_master.png" alt="Master fault tolerance flowchart"  width="40%" />
+<p align="center">
+   <img src="/img/failover-master.jpg" alt="failover-master"  width="50%" />
  </p>
-After the fault tolerance of ZooKeeper Master is completed, it is re-scheduled by the Scheduler thread in DolphinScheduler, traverses the DAG to find the "running" and "submit successful" tasks, monitors the status of its task instances for the "running" tasks, and "commits successful" tasks It is necessary to determine whether the task queue already exists. If it exists, the status of the task instance is also monitored. If it does not exist, resubmit the task instance.
+<p>Fault tolerance range: From the perspective of host, the fault tolerance range of Master includes: own host + node host that does not exist in the registry, and the entire process of fault tolerance will be locked;</p>
+<p>Fault-tolerant content: Master's fault-tolerant content includes: fault-tolerant process instances and task instances. Before fault-tolerant, it compares the start time of the instance with the server start-up time, and skips fault-tolerance if after the server start time;</p>
+<p>Fault-tolerant post-processing: After the fault tolerance of ZooKeeper Master is completed, it is re-scheduled by the Scheduler thread in DolphinScheduler, traverses the DAG to find the &quot;running&quot; and &quot;submit successful&quot; tasks, monitors the status of its task instances for the &quot;running&quot; tasks, and &quot;commits successful&quot; tasks It is necessary to determine whether the task queue already exists. If it exists, the status of the task instance is also monitored. If it does not exist, resubmit the task instance.</p>
 <ul>
-<li>Worker fault tolerance flowchart：</li>
+<li>Worker fault tolerance：</li>
 </ul>
- <p align="center">
-   <img src="https://analysys.github.io/easyscheduler_docs_cn/images/fault-tolerant_worker.png" alt="Worker fault tolerance flow chart"  width="40%" />
+<p align="center">
+   <img src="/img/failover-worker.jpg" alt="failover-worker"  width="50%" />
  </p>
-<p>Once the Master Scheduler thread finds that the task instance is in the &quot;fault-tolerant&quot; state, it takes over the task
-and resubmits it.</p>
-<p>Note: Due to &quot;network jitter&quot;, the node may lose its heartbeat with ZooKeeper in a short period of time, and the node's
-remove event may occur. For this situation, we use the simplest way, that is, once the node and ZooKeeper timeout
-connection occurs, then directly stop the Master or Worker service.</p>
+<p>Fault tolerance range: From the perspective of process instance, each Master is only responsible for fault tolerance of its own process instance; it will lock only when <code>handleDeadServer</code>;</p>
+<p>Fault-tolerant content: When sending the remove event of the Worker node, the Master only fault-tolerant task instances. Before fault-tolerant, it compares the start time of the instance with the server start-up time, and skips fault-tolerance if after the server start time;</p>
+<p>Fault-tolerant post-processing: Once the Master Scheduler thread finds that the task instance is in the &quot;fault-tolerant&quot; state, it takes over the task and resubmits it.</p>
+<p>Note: Due to &quot;network jitter&quot;, the node may lose its heartbeat with ZooKeeper in a short period of time, and the node's remove event may occur. For this situation, we use the simplest way, that is, once the node and ZooKeeper timeout connection occurs, then directly stop the Master or Worker service.</p>
 <h6>2.Task failed and try again</h6>
 <p>Here we must first distinguish the concepts of task failure retry, process failure recovery, and process failure rerun:</p>
 <ul>
