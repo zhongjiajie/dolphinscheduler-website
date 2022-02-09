@@ -78,7 +78,7 @@ version 1.3 not use grpc, we use netty directly</p>
 <p>A:   1, if it is node startup, check whether the .env API_BASE configuration under dolphinscheduler-ui is the Api Server service address.</p>
 <p>​       2, If it is nginx booted and installed via <strong><a href="http://install-dolphinscheduler-ui.sh">install-dolphinscheduler-ui.sh</a></strong>, check if the proxy_pass      			configuration in <strong>/etc/nginx/conf.d/dolphinscheduler.conf</strong> is the Api Server service address</p>
 <p>​       3, if the above configuration is correct, then please check if the Api Server service is normal,</p>
-<p>​		   curl <a href="http://192.168.xx.xx:12345/dolphinscheduler/users/get-user-info">http://192.168.xx.xx:12345/dolphinscheduler/users/get-user-info</a>, check the Api Server log,</p>
+<p>​		   curl <a href="http://localhost:12345/dolphinscheduler/users/get-user-info">http://localhost:12345/dolphinscheduler/users/get-user-info</a>, check the Api Server log,</p>
 <p>​          if  Prompt cn.dolphinscheduler.api.interceptor.LoginHandlerInterceptor:[76] - session info is null,   		  which proves that the Api Server service is normal.</p>
 <p>​	4, if there is no problem above, you need to check if <strong>server.context-path and server.port configuration</strong> in <strong>application.properties</strong> is correct</p>
 <hr>
